@@ -10,4 +10,5 @@ Explore the funniest fails from around the world, handpicked for your daily dose
 - 💬 **Share and Laugh:** Join our community to share and enjoy epic fail stories.
 - 🎯 **Quick Hits:** Dive into themed compilations for instant laughs.
 
-Ready for a laughter-packed journey? Visit [EpicFailHub](#) for your daily dose of worldwide hilarity! 😄🌟
+Ready for a laughter-packed journey? Visit [https://nimish05z.github.io/Epic-Fails-Hub/]
+(#) for your daily dose of worldwide hilarity! 😄🌟
