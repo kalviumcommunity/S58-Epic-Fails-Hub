@@ -1,0 +1,14 @@
+{
+  "name": "s58-epic-fails-hub",
+  "version": "1.0.0",
+  "description": "Epic Fails I will create a website that will show Epic Fail Content from around the globe.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
