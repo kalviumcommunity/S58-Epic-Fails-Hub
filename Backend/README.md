@@ -13,3 +13,5 @@ Why EpicFailHub?
 🎯 Quick Hits: Dive into themed compilations for instant laughs.
 
 Ready for a laughter-packed journey? Visit EpicFailHub for your daily dose of worldwide hilarity! 😄🌟
+
+Render Link : https://s58-epic-fails-hub.onrender.com
