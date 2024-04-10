@@ -1,0 +1,19 @@
+meta {
+  name: post
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/get/api
+  body: none
+  auth: none
+}
+
+body:json {
+  [{
+          "ID": 1,
+          "Captions": "Bro almost made it",
+          "Links": "https://i.pinimg.com/736x/bd/10/0d/bd100d1eaece4624560ba1a8d7da937d.jpg"
+      }]
+}

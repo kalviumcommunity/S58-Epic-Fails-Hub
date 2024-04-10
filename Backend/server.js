@@ -3,6 +3,14 @@ const app = express();
 const port = process.env.PUBLIC_PORT || 8080;
 const mongoose = require("mongoose");
 const { connection } = require("./config/db");
+const epicfailshubdata = require("./config/database");
+const { epicfailshubModel } = require("./model/epicfailshub");
+const CRUD_routes = require("./Routes/routes");
+const cors = require("cors");
+
+app.use(express.json());
+app.use(cors());
+app.use("/routes", CRUD_routes);
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -35,4 +43,17 @@ app.get("/ping", (req, res) => {
 
 const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+app.post("/postdata", (req, res) => {
+  epicfailshubModel
+    .insertMany(epicfailshubdata)
+    .then((result) => {
+      console.log("Inserted", result.length, "documents into the collection");
+      res.status(200).send("Data inserted successfully");
+    })
+    .catch((error) => {
+      console.error("Error inserting documents:", error);
+      res.status(500).send("Failed to insert data");
+    });
 });
