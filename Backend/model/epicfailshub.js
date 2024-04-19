@@ -4,6 +4,6 @@ const epicfailshubSchema = mongoose.Schema({
   Links: String,
   Captions: String,
 });
-const epicfailshubModel = mongoose.model("epicfailshub", epicfailshubSchema);
+const epicfailshubModel = mongoose.model("epicfailhub", epicfailshubSchema);
 
 module.exports = { epicfailshubModel };
