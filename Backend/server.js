@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const { connection } = require("./config/db");
 const epicfailshubdata = require("./config/database");
 const { epicfailshubModel } = require("./model/epicfailshub");
-const CRUD_routes = require("./Routes/routes");
+const CRUD_routes = require("./routes/routes");
 const cors = require("cors");
 
 app.use(express.json());
@@ -22,6 +22,7 @@ app.get("/", async (req, res) => {
     if (mongoose.connection.readyState === 1) {
       message = "Connected to MongoDB";
       statusCode = 200;
+      console.log(res);
     } else {
       message = "Not connected to MongoDB";
       statusCode = 500;
