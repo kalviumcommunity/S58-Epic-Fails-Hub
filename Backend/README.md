@@ -14,4 +14,5 @@ Why EpicFailHub?
 
 Ready for a laughter-packed journey? Visit EpicFailHub for your daily dose of worldwide hilarity! 😄🌟
 
-Render Link : https://s58-epic-fails-hub.onrender.com
+Render Link   : https://s58-epic-fails-hub.onrender.com
+Deployed Link : https://6630d5c17519e9c39f4bff77--golden-khapse-0f603f.netlify.app/ 
