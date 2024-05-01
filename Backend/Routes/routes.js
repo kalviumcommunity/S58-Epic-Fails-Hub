@@ -15,16 +15,18 @@ CRUD_routes.get("/", async (req, res) => {
 });
 
 CRUD_routes.post("/Create", async (req, res) => {
+  const checkID = await epicfailshubModel.findOne({
+    ID: req.body.ID,
+  });
+  if (checkID) {
+    return res.status(400).send("ID already exists");
+  }
   const { ID, Links, Captions } = req.body;
   let payload = { ID, Links, Captions };
 
   console.log(payload);
   try {
-    // const newepicfailshub = new epicfailshubModel(payload);
-    // await newepicfailshub.save();
     const result = await epicfailshubModel.create(payload);
-    // await epicfailshubModel.create(payload)
-    // console.log(newepicfailshub, payload);
     res.send({ message: "epicfailshub created successfully", result });
   } catch (error) {
     res.send("Error " + error);
@@ -32,24 +34,58 @@ CRUD_routes.post("/Create", async (req, res) => {
 });
 
 CRUD_routes.put("/Update/:id", async (req, res) => {
-  let id = req.params.id;
-  let payload = req.body;
   try {
-    const epicfailshub = await epicfailshubModel.findByIdAndUpdate(id, payload);
-    res.json({ message: "epicfailshub updated successfully" });
+    const frontEndID = req.params.id;
+    const { Links, Captions } = req.body;
+
+    // Check if the post with the given ID exists
+    const existingPost = await epicfailshubModel.findOne({ ID: frontEndID });
+    if (!existingPost) {
+      return res.status(400).send("Post with the provided ID does not exist");
+    }
+
+    // Update the post
+    const updatedPost = await epicfailshubModel.findOneAndUpdate(
+      { ID: frontEndID },
+      { Links, Captions },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedPost) {
+      return res.status(500).send("Failed to update post");
+    }
+
+    return res.json({ message: "Post updated successfully", updatedPost });
   } catch (error) {
-    res.send("Error " + error);
+    console.error("Error updating post:", error);
+    return res.status(500).send("An error occurred while updating the post");
   }
 });
 
 CRUD_routes.delete("/Delete/:id", async (req, res) => {
-  let id = req.params.id;
   try {
-    const epicfailshub = await epicfailshubModel.findByIdAndDelete(id);
-    res.json({ message: "epicfailshub deleted successfully" });
+    const frontEndID = req.params.id;
+
+    // Check if the post with the given ID exists
+    const existingPost = await epicfailshubModel.findOne({ ID: frontEndID });
+    if (!existingPost) {
+      return res.status(404).send("Post with the provided ID does not exist");
+    }
+
+    // Delete the post
+    const deletedPost = await epicfailshubModel.findOneAndDelete({
+      ID: frontEndID,
+    });
+
+    if (!deletedPost) {
+      return res.status(500).send("Failed to delete post");
+    }
+
+    return res.json({ message: "Post deleted successfully", deletedPost });
   } catch (error) {
-    res.send("Error " + error);
+    console.error("Error deleting post:", error);
+    return res.status(500).send("An error occurred while deleting the post");
   }
 });
 
-module.exports = CRUD_routes; 
+module.exports = CRUD_routes;
