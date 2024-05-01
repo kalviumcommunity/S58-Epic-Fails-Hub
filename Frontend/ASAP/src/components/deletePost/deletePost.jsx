@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+// Added functionality to delete a post
 export function DeletePost() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOption, setSearchOption] = useState("ID");

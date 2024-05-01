@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// Added functionality to update a post
 export function UpdatePost() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOption, setSearchOption] = useState("ID");
