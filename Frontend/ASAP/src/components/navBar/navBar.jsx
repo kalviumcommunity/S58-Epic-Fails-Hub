@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+// navBar.jsx
+import React, { useState, useEffect } from 'react';
 import './navBar.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 
-export function Navbar() {
+export function Navbar({ setFilteredCreator }) {
+  const [creatorOptions, setCreatorOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchCreatorOptions = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/routes"); // Adjust the endpoint URL accordingly
+        const creators = response.data.map(post => post.Created_By);
+        const uniqueCreators = [...new Set(creators)];
+        setCreatorOptions(uniqueCreators);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchCreatorOptions();
+  }, []);
+
+  const handleCreatorSelect = (event) => {
+    const selectedCreator = event.target.value;
+    setFilteredCreator(selectedCreator); // Pass the selected creator to the parent component
+  };
+
   return (
     <nav className="navbar">
       <div className="logo">
         <Link to="/">
-        <h1>Epic Fails Hub</h1>
+          <h1>Epic Fails Hub</h1>
         </Link>
       </div>
       <ul className="nav-links">
@@ -17,7 +42,20 @@ export function Navbar() {
         <li><Link to="/delete-post">Delete Post</Link></li>
         <li><Link to="/signup">SignUp</Link></li>
         <li><Link to="/login">Login</Link></li>
+        <li>
+          <select onChange={handleCreatorSelect}>
+            <option value="">All</option>
+            {creatorOptions.map((creator, index) => (
+              <option key={index} value={creator}>{creator}</option>
+            ))}
+          </select>
+        </li>
       </ul>
     </nav>
   );
 }
+
+// Prop types validation
+Navbar.propTypes = {
+  setFilteredCreator: PropTypes.func.isRequired,
+};
