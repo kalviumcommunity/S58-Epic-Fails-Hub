@@ -113,7 +113,7 @@ app.post("/login", async (req, res) => {
     const secretKey = "Nimish";
     const token = jwt.sign({ userId: user._id }, secretKey);
 
-    //Module 16
+    //Module 17
     // Set the token in a cookie
     res.cookie("token", token, { httpOnly: true });
 

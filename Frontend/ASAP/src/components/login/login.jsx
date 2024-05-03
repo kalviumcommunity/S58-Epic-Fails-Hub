@@ -18,7 +18,7 @@ export function Login() {
       );
       console.log(response.data); // Log the response for debugging
 
-      // Module 16
+      // Module 17
       document.cookie = `token=${response.data.token}; path=/`;
       setSubmitMessage("Login successful!"); // Show success message
       // You may want to redirect the user to another page upon successful login
