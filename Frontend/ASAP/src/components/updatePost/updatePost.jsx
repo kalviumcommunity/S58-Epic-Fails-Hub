@@ -10,6 +10,7 @@ export function UpdatePost() {
     ID: "",
     Captions: "",
     Links: "",
+    Created_By: "",
   });
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -37,7 +38,7 @@ export function UpdatePost() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!formData.Captions || !formData.Links) {
+    if (!formData.Captions || !formData.Links || !formData.Created_By) {
       setSubmitMessage("Please fill in all fields.");
       return;
     }
@@ -98,6 +99,7 @@ export function UpdatePost() {
               <p>ID: {post.ID}</p>
               <p>Caption: {post.Captions}</p>
               <p>Link: {post.Links}</p>
+              <p>Created_By: {post.Created_By}</p>
               <button onClick={() => handleUpdateClick(post)}>Update</button>
             </div>
           ))
@@ -119,6 +121,13 @@ export function UpdatePost() {
           name="Links"
           value={formData.Links}
           placeholder="Links"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="Created_By"
+          value={formData.Created_By}
+          placeholder="Created_By"
           onChange={handleChange}
         />
         <button type="submit">Update Post</button>

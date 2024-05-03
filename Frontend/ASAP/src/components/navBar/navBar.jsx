@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './navBar.css';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,8 @@ export function Navbar() {
         <li><Link to="/add-post">Add Post</Link></li>
         <li><Link to="/update-post">Update Post</Link></li>
         <li><Link to="/delete-post">Delete Post</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/signup">SignUp</Link></li>
+        <li><Link to="/login">Login</Link></li>
       </ul>
     </nav>
   );
