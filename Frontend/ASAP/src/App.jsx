@@ -8,6 +8,11 @@ import { UpdatePost } from "./components/updatePost/updatePost";
 import { SinglePost } from "./components/singlePost/singlePost";
 import { DeletePost } from "./components/deletePost/deletePost";
 
+// Module 15
+import { Login } from "./components/login/login";
+import { Signup } from "./components/signup/signup";
+import { Logout } from "./components/logout/logout";
+
 function App() {
   return (
     <>
@@ -18,6 +23,10 @@ function App() {
         <Route path="/update-post" element={<UpdatePost />} />
         <Route path="/delete-post" element={<DeletePost />} />
         <Route path="/post/:id" element={<SinglePost />} />
+        {/* Module 15 */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </>
   );

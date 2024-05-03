@@ -21,8 +21,8 @@ CRUD_routes.post("/Create", async (req, res) => {
   if (checkID) {
     return res.status(400).send("ID already exists");
   }
-  const { ID, Links, Captions } = req.body;
-  let payload = { ID, Links, Captions };
+  const { ID, Links, Captions, Created_By } = req.body;
+  let payload = { ID, Links, Captions, Created_By };
 
   console.log(payload);
   try {
@@ -36,7 +36,7 @@ CRUD_routes.post("/Create", async (req, res) => {
 CRUD_routes.put("/Update/:id", async (req, res) => {
   try {
     const frontEndID = req.params.id;
-    const { Links, Captions } = req.body;
+    const { Links, Captions, Created_By } = req.body;
 
     // Check if the post with the given ID exists
     const existingPost = await epicfailshubModel.findOne({ ID: frontEndID });
@@ -47,7 +47,7 @@ CRUD_routes.put("/Update/:id", async (req, res) => {
     // Update the post
     const updatedPost = await epicfailshubModel.findOneAndUpdate(
       { ID: frontEndID },
-      { Links, Captions },
+      { Links, Captions, Created_By },
       { new: true } // Return the updated document
     );
 
@@ -89,3 +89,16 @@ CRUD_routes.delete("/Delete/:id", async (req, res) => {
 });
 
 module.exports = CRUD_routes;
+
+
+// CRUD_routes.get('/Created_by',async(req,res)=>{
+//   console.log("req",req)
+//   try{
+//       const misspells=await misspellsModel.find({Created_by: req.query.Created_by})
+//       console.log(misspells)
+//       res.json(misspells)
+//   }catch(err){
+//       console.log(err)
+//       res.send({'Error':err})
+//   }
+// })

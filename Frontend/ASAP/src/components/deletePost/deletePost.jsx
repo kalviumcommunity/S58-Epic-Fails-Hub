@@ -38,8 +38,10 @@ export function DeletePost() {
   const handleDelete = async (postId) => {
     try {
       // Send a request to delete the post with the provided ID
-      const response = await axios.delete(`http://localhost:8080/routes/Delete/${postId}`);
-      
+      const response = await axios.delete(
+        `http://localhost:8080/routes/Delete/${postId}`
+      );
+
       // Handle the response
       setSubmitMessage(response.data.message);
     } catch (error) {
@@ -73,6 +75,7 @@ export function DeletePost() {
               <p>ID: {post.ID}</p>
               <p>Caption: {post.Captions}</p>
               <p>Link: {post.Links}</p>
+              <p>Created_By: {post.Created_By}</p>
               <button onClick={() => handleDelete(post.ID)}>Delete</button>
             </div>
           ))

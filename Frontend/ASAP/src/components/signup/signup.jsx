@@ -1,26 +1,32 @@
+// Module 15
+
 import React, { useState } from "react";
 import axios from "axios";
 
-export function AddPost() {
+export function Signup() {
   const [formData, setFormData] = useState({
-    ID: "",
-    Captions: "",
-    Links: "",
-    Created_By: "",
+    username: "",
+    email: "",
+    password: "",
   });
   const [submitMessage, setSubmitMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8080/routes/Create", formData);
-      setSubmitMessage("Submission successful!"); // Show success message
-      setFormData({ ID: "", Captions: "", Links: "", Created_By: "" }); // Clear form
+      const response = await axios.post(
+        "http://localhost:8080/signup",
+        formData
+      );
+      console.log(response.data); // Log the response for debugging
+      setSubmitMessage("Signup successful!"); // Show success message
+      setFormData({ username: "", email: "", password: "" }); // Clear form
       setTimeout(() => {
         setSubmitMessage(""); // Clear message after 3 seconds
       }, 3000);
     } catch (error) {
-      console.error(error);
+      console.error("Signup failed:", error);
+      setSubmitMessage("Signup failed. Please try again."); // Show error message
     }
   };
 
@@ -34,45 +40,36 @@ export function AddPost() {
 
   return (
     <div>
-      <h2>Submit New Post</h2>
+      <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>ID:</label>
+          <label>Username:</label>
           <input
             type="text"
-            name="ID"
-            value={formData.ID}
+            name="username"
+            value={formData.username}
             onChange={handleChange}
           />
         </div>
         <div>
-          <label>Caption:</label>
+          <label>Email:</label>
           <input
-            type="text"
-            name="Captions"
-            value={formData.Captions}
+            type="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
           />
         </div>
         <div>
-          <label>Link:</label>
+          <label>Password:</label>
           <input
-            type="text"
-            name="Links"
-            value={formData.Links}
+            type="password"
+            name="password"
+            value={formData.password}
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label>Created_By:</label>
-          <input
-            type="text"
-            name="Created_By"
-            value={formData.Created_By}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Signup</button>
       </form>
       {submitMessage && <p>{submitMessage}</p>}
     </div>
