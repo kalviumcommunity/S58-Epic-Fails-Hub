@@ -108,10 +108,12 @@ app.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
 
+    // Module 16
     // Password is valid, generate JWT token for authentication
     const secretKey = "Nimish";
     const token = jwt.sign({ userId: user._id }, secretKey);
 
+    //Module 16
     // Set the token in a cookie
     res.cookie("token", token, { httpOnly: true });
 
