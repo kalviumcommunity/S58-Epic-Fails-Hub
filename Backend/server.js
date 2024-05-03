@@ -18,12 +18,14 @@ app.use("/routes", CRUD_routes);
 const dotenv = require("dotenv");
 dotenv.config();
 
+// Module 15
 const schema = joi.object({
   username: joi.string().min(3).max(20).required(),
   email: joi.string().email().required(),
   password: joi.string().min(3).max(20).required(),
 });
 
+// Module 15
 const validateUserInput = (Input) => {
   // console.log(email,password)
   const { error, value } = schema.validate(Input);
@@ -68,6 +70,7 @@ const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+// Module 15
 app.post("/signup", async (req, res) => {
   let result = validateUserInput(req.body);
 
@@ -79,18 +82,17 @@ app.post("/signup", async (req, res) => {
   try {
     const user = new userModel(req.body);
     await user.save();
-    res
-      .status(201)
-      .json({
-        msg: "Validation & SignUp done Successfully",
-        data: user.toJSON(),
-      });
+    res.status(201).json({
+      msg: "Validation & SignUp done Successfully",
+      data: user.toJSON(),
+    });
   } catch (e) {
     console.log(e);
     res.status(400).json({ message: "Sign Up Failed", error: e });
   }
 });
 
+// Module 15
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -119,7 +121,6 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ message: "An error occurred while logging in" });
   }
 });
-
 
 app.post("/postdata", (req, res) => {
   epicfailshubModel
